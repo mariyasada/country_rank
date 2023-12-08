@@ -10,20 +10,19 @@ export type protectedRoutesProps= {
   children: ReactNode
 };
 
-export const ProtectRoute : React.FC <protectedRoutesProps>= ({ children }) => {
+export const ProtectRoute = ({ children }:protectedRoutesProps) => {
     const { isAuthenticated } = useAuth() as AuthContextType;
     const router=useRouter();
     
  
-    // useEffect(() => {
-    //   const redirectUser = async () => {
-    //     if (!isAuthenticated && window.location.pathname !== '/') {
-    //       router.push("/signup");
-    //     }
-    //   };
-  
-    //   redirectUser();
-    // }, [isAuthenticated]);
+    useEffect(() => {
+      const redirectUser = async () => {
+        if (!isAuthenticated && window.location.pathname !== '/') {
+          router.push("/signup");
+        }
+      };
+      redirectUser();
+    }, [isAuthenticated,router]);
   
     return <>{children}</>;
  };
