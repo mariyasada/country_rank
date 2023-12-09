@@ -24,6 +24,7 @@ const CountryTable = ({ search }: CountryTableProps) => {
   const [countryData, setCountryData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
+  const[orderBy,setOrderBy]=useState({order:"",keyName:""});
   const countryPerPage = 10;
   const router = useRouter();
 
@@ -47,8 +48,6 @@ const CountryTable = ({ search }: CountryTableProps) => {
     })();
   }, [search]);
 
-  console.log("check filterd data", search);
-
   //   pagination logic
   useEffect(() => {
     if (countryData.length > 0) {
@@ -61,6 +60,43 @@ const CountryTable = ({ search }: CountryTableProps) => {
   const paginatedCompanies =
     countryData?.length > 0 ? countryData?.slice(startIndex, endIndex):[] as Array<countryProps>;
 
+
+    const HandleOrderBy=(header:string)=>{
+      if(orderBy.order==="DSC"){
+        if(header==="Name"){
+          setCountryData(prev=>prev.sort((a: countryProps, b: countryProps) =>
+          a.name.common.toLowerCase().localeCompare(b.name.common.toLowerCase())
+        ))
+        }
+        else if(header==="Population"){
+          setCountryData(prev=>prev.sort((a: countryProps, b: countryProps) =>
+          a.population-b.population
+        ))
+        }else{
+          setCountryData(prev=>prev.sort((a: countryProps, b: countryProps) =>
+          a.area-b.area
+        ))
+        }
+      }
+      else{
+        if(header==="Name"){
+          setCountryData(prev=>prev.sort((a: countryProps, b: countryProps) =>
+          b.name.common.toLowerCase().localeCompare(a.name.common.toLowerCase())
+        ))
+        }
+        else if(header==="Population"){
+          setCountryData(prev=>prev.sort((a: countryProps, b: countryProps) =>
+          b.population-a.population
+        ))
+        }
+        else{
+          setCountryData(prev=>prev.sort((a: countryProps, b: countryProps) =>
+          b.area-a.area
+        ))
+        }
+      }
+    }
+
   return (
     <Container className="w-5/5 my-10 gap-5 flex flex-col items-center justify-center">
       <Box className="flex p-2 flex-row text-base text-slate-400 font-bold  bg-slate-100 shadow-sm rounded-sm ">
@@ -72,10 +108,14 @@ const CountryTable = ({ search }: CountryTableProps) => {
             } flex justify-center -px-8 `}
           >
             <div>{header}</div>
-            {header !== "Flag" && (
-              <div>
-                <MdArrowDropUp />
-                <MdArrowDropDown />
+            {(header !== "Flag"&& header !=="Region"&& header !=="Capital") && (
+              <div style={{cursor:"pointer"}}>
+                <MdArrowDropUp onClick={()=>{ 
+                  setOrderBy(prev=>({...prev,order:"ASC",keyName:header}));
+                HandleOrderBy(header)} } style={{color:orderBy.order==="ASC"&& header===orderBy.keyName?"#38bdf8":""}}/>
+                <MdArrowDropDown  onClick={()=>{ 
+                   setOrderBy(prev=>({...prev,order:"DSC",keyName:header}));
+                HandleOrderBy(header)}} style={{color:orderBy.order==="DSC"&& header===orderBy.keyName?"#38bdf8":""}}/>
               </div>
             )}
           </Box>

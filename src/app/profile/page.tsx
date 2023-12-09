@@ -1,5 +1,5 @@
 "use client"
-import { Box ,Container,Text} from '@radix-ui/themes';
+import { Box ,Container,Text,Button} from '@radix-ui/themes';
 import React from 'react'
 import { AuthContextType, useAuth,User } from '../context/AuthContext';
 
@@ -13,7 +13,7 @@ const page = () => {
     <Box className='text-slate-600 text-2xl capitalize flex flex-col gap-5' >
       <Text >Hello,{username && username}</Text>
        <Text>Are you sure you want to logout?</Text>
-       <button onClick={logout} className='bg-slate-500 shadow-lg text-white text-base rounded-md w-20 py-2'>Logout</button>
+       <Button onClick={logout} className='bg-slate-500 shadow-lg text-white text-base rounded-md w-20 py-2'>Logout</Button>
        </Box>
     </Container>
   )
