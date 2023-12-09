@@ -8,14 +8,15 @@ import { ResponsiveContainer,BarChart,Bar,XAxis,YAxis,CartesianGrid,Tooltip } fr
 
 const page = () => {
     const [country,setCountry]=useState<countryProps>();
-    const [populationData,setPopulationData]=useState([])
+    const [populationData,setPopulationData]=useState([]);
+    const [loading,setLoading]=useState(false);
     let pathname=usePathname();
     pathname=pathname.slice(-3);
     
     useEffect(()=>{
         (async()=>{
             const res = await fetch(`https://restcountries.com/v3.1/alpha/${pathname}`);           
-            const singleCountry = await res.json();
+            const singleCountry = await res.json();           
             setCountry(singleCountry[0])
             })();
     },[])
@@ -24,9 +25,12 @@ const page = () => {
        const country_URL= "https://d6wn6bmjj722w.population.io/1.0/population";
        const year=new Date().getFullYear();
        (async()=>{
+        setLoading(true);
         const res = await fetch(`${country_URL}/${year}/${country?.name.common}`);           
         const detail = await res.json();
+        
         if(detail?.length> 0) {
+            
             const formattedData=detail && detail?.reduce((acc:Array<ageProps>,curr:ageProps)=>{
                 const ageGroup = getAgeGroup(curr.age ?? 0); 
                 const existingEntry=acc?.find(entry => entry.name === ageGroup)
@@ -39,20 +43,21 @@ const page = () => {
                 }
                 return acc;
                 
-            },[])          
-
+            },[])       
             setPopulationData(formattedData)
         }
+        setLoading(false);
         })();
 
     },[country]);
 
-    console.log(populationData,"check") 
+ 
 
 
   return (
   <Container className='py-28  bg-slate-100 h-screen' style={{overflowY:"auto",overflowX:'hidden'}}>
     {/* whole box also contains graph */}
+    {loading? <Box className='flex  gap-7 justify-center h-screen w-screen'><Text className=' text-blue-500 text-5xl'>Loading.......</Text></Box>:
     <Box className='flex flex-col gap-7 h-auto w-full'>
     <Box className=' flex flex-row justify-center gap-7 w-full'>
     {/* left side div */}
@@ -161,7 +166,7 @@ const page = () => {
         </ResponsiveContainer>
     </Box>
 ):<Box className='h-2/4 w-full  flex items-center justify-center'><Text className='text-red-400 text-2xl'>No data Present for this country</Text></Box>}
-    </Box>
+    </Box>}
    </Container>
   )
 }
