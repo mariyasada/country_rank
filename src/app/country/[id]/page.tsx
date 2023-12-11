@@ -8,7 +8,7 @@ import Image from 'next/image';
 
 
 const Page = () => {
-    const [country,setCountry]=useState<countryProps>();
+    const [country,setCountry]=useState({} as countryProps);
     const [populationData,setPopulationData]=useState([]);
     const [loading,setLoading]=useState(false);
     let pathname=usePathname();
