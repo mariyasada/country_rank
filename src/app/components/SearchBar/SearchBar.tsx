@@ -8,7 +8,6 @@ export type searchBarProps={
 }
 
 const SearchBar = ({searchValue,setSearchValue}:searchBarProps) => {
-  console.log(searchValue,"line 11")
   return (
   <Box className='p-4 flex flex-row gap-3 items-center bg-white w-4/12 rounded-md shadow-md text-base' >
       <FaSearch size={20} className="text-slate-500" />

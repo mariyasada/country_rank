@@ -3,7 +3,7 @@ import { Box ,Container,Text,Button} from '@radix-ui/themes';
 import React from 'react'
 import { AuthContextType, useAuth,User } from '../context/AuthContext';
 
-const page = () => {
+const Page = () => {
   const {user,logout}=useAuth() as AuthContextType;
   const atIndex =user && user?.email?.indexOf('@');
   const username = user && atIndex !== -1 ? user?.email?.slice(0, atIndex) : user?.email;
@@ -19,4 +19,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Page

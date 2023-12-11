@@ -4,7 +4,7 @@ import {FaEye,FaEyeSlash} from "react-icons/fa";
 import { AuthContextType, useAuth } from '../context/AuthContext';
 
 
-const page = () => {
+const Page = () => {
   const {logInHandler}=useAuth() as AuthContextType;
     const [password,setPassword]=useState("password");
     const [loginData,setLoginData]=useState({email:"",password:""});
@@ -60,4 +60,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Page

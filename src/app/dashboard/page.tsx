@@ -7,7 +7,7 @@ import SearchBar from '../components/SearchBar/SearchBar';
 import CountryTable from '../components/Table/CountryTable';
 
 
-const page = () => {
+const Page = () => {
   const [searchValue,setSearchValue]=useState("");
   
   return (
@@ -23,4 +23,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Page
