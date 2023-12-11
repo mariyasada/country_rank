@@ -2,14 +2,14 @@
 const nextConfig = {
   images: {
     domains: ["flagcdn.com", "upload.wikimedia.org"],
-    remotePatterns: [
-      {
-        protocol: "https",
-        hostname: "flagcdn.com",
-        port: "",
-        pathname: "/w320/**",
-      },
-    ],
+    // remotePatterns: [
+    //   {
+    //     protocol: "https",
+    //     hostname: "flagcdn.com",
+    //     port: "",
+    //     pathname: "/w320/**",
+    //   },
+    // ],
   },
 };
 

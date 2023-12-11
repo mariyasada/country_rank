@@ -127,7 +127,7 @@ const CountryTable = ({ search }: CountryTableProps) => {
         {paginatedCompanies?.length > 0 &&
           paginatedCompanies?.map((country: country) => (
             <Link
-              key={country.name.common}
+              // key={country.name.common}
               href={`/country/${country.cca3}`}
               className="w-12/12 flex flex-row items-center justify-center gap-20 p-2 text-base bg-white shadow-md rounded-md cursor-pointer"
             >

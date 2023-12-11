@@ -51,7 +51,6 @@ const Page = () => {
         })();
 
     },[country]);
-
  
 
 
@@ -85,17 +84,17 @@ const Page = () => {
         <Text className='text-xl '>Details</Text>
         <Box className='w-full p-4 border-b-[2px] border-solid border-slate-100 flex justify-between'>
         <Text className='text-base text-slate-300 font-bold'>Capital</Text>
-        <Text className='text-base text-slate-800 '>{country?.capital[0]}</Text>
+        <Text className='text-base text-slate-800 '>{country?.capital?.length>0 && country.capital[0]}</Text>
         </Box>
         <Box className='w-full p-4 border-b-[2px] border-solid border-slate-100 flex justify-between'>
         <Text className='text-base text-slate-300 font-bold w-3/4'>Languages</Text>
-        {country && Object.entries(country?.languages).map(([key,value])=>(
-        <Text key={key} className='text-base text-slate-800'>{value},</Text>))}
+        {country && typeof country.languages=== 'object' ? Object.entries(country?.languages).map(([key,value])=>(
+        <Text key={key} className='text-base text-slate-800'>{value},</Text>)):<Text>""</Text>}
         </Box>
         <Box className='w-full p-4 border-b-[2px] border-solid border-slate-100 flex justify-between'> 
         <Text className='text-base text-slate-300 font-bold'>Currencies</Text> 
-        {country && Object.entries(country?.currencies).map(([key,value])=>(
-        <Text key={key} className='text-base text-slate-800'>{value.name}</Text>))}</Box>
+        { country && typeof country?.currencies==="object" ? Object.entries(country?.currencies).map(([key,value])=>(
+        <Text key={key} className='text-base text-slate-800'>{value.name}</Text>)):<Text>""</Text>}</Box>
         <Box className='w-full p-4 border-b-[2px] border-solid border-slate-100 flex justify-between'> <Text className='text-base text-slate-300 font-bold'>Subregion</Text> <Text className='text-base text-slate-800  '>{country?.subregion}</Text></Box>
         <Box className='w-full p-4  flex justify-between'> <Text className='text-base text-slate-300 font-bold'>UN Member</Text>  <Text className='text-base text-slate-800  '>{country?.unMember
 ?"Yes":"No"}</Text></Box>
