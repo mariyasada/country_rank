@@ -6,6 +6,7 @@ import { FaForward, FaBackward } from "react-icons/fa";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { countryProps as country, countryProps } from "../../constants/type";
+import Image from "next/image";
 
 export const HEADERS: string[] = [
   "Flag",
@@ -131,9 +132,11 @@ const CountryTable = ({ search }: CountryTableProps) => {
               className="w-12/12 flex flex-row items-center justify-center gap-20 p-2 text-base bg-white shadow-md rounded-md cursor-pointer"
             >
               <div key={country.name.common}>
-                <img
+                <Image
+                width={400}
+                height={400}
                   src={country.flags.png}
-                  className="h-20 w-20 object-cover"
+                  className="h-20 w-20 object-contain"
                   alt="flag"
                 />
               </div>

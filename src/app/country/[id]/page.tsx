@@ -4,6 +4,7 @@ import {Container,Box,Text} from "@radix-ui/themes"
 import { usePathname } from 'next/navigation';
 import { ageProps, countryProps,getAgeGroup } from '../../constants/type';
 import { ResponsiveContainer,BarChart,Bar,XAxis,YAxis,CartesianGrid,Tooltip } from 'recharts';
+import Image from 'next/image';
 
 
 const page = () => {
@@ -62,7 +63,7 @@ const page = () => {
     <Box className=' flex flex-row justify-center gap-7 w-full'>
     {/* left side div */}
     <Box className='flex flex-col gap-3 bg-white rounded-md shadow-lg p-4' >
-    <Box className='' ><img src={country?.flags?.png} alt="flag of country" className='h-40 w-80 object-contain'/></Box>
+    <Box className='' ><Image src={country?.flags?.png} alt="flag of country" width={400} height={400} className='h-40 w-80 object-contain'/></Box>
     <Box className='flex flex-col w-full items-center'>
         <Text className='text-2xl text-slate-900'>{country?.name?.common}</Text>
         <Text className='text-base text-slate-400'>{country?.region}</Text>
